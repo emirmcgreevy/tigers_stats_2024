@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
     const selectElement = document.getElementById('stat-select');
-    const ctx = document.getElementById('batPostChart').getContext('2d');
+    const ctx = document.getElementById('batPostChart')?.getContext('2d');
     const pitchSelectElement = document.getElementById('pitch-stat-select');
-    const pitchCtx = document.getElementById('pitchPostChart').getContext('2d');
+    const pitchCtx = document.getElementById('pitchPostChart')?.getContext('2d');
 
     let batChart;
     let pitchPostChart;
     
-    selectElement.addEventListener('change', (event) => {
+    selectElement?.addEventListener('change', (event) => {
         const selectedStat = event.target.value;
         fetchBatPostDataAndRenderChart(selectedStat);
     });
 
-    pitchSelectElement.addEventListener('change', (event) => {
+    pitchSelectElement?.addEventListener('change', (event) => {
         const selectedPitchStat = event.target.value;
         fetchPostPitchDataAndRenderChart(selectedPitchStat);
     });
 
     function fetchBatPostDataAndRenderChart(stat) {
-        fetch('/api/playoff_batting_stats')
+        fetch('static/tigers_post_batting.json')
             .then(response => response.json())
             .then(data => {
                 if (batChart) {
@@ -47,11 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
-            });
+            })
+            .catch(err => console.error(err));
     }
 
     function fetchPostPitchDataAndRenderChart(stat) {
-        fetch('/api/playoff_pitching_stats')
+        fetch('static/tigers_post_pitching.json')
             .then(response => response.json())
             .then(data => {
                 if (pitchPostChart) {
@@ -80,7 +81,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
-            });
+            })
+            .catch(err => console.error(err));
     }
 
     // Initial render with default stat

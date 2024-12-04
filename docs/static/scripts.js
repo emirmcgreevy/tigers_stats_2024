@@ -1,33 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const selectElement = document.getElementById('stat-select');
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const pitchSelectElement = document.getElementById('pitch-stat-select');
-    const pitchCtx = document.getElementById('pitchChart').getContext('2d');
-
-    let chart;
-    let pitchChart;
-    
-    selectElement.addEventListener('change', (event) => {
-        const selectedStat = event.target.value;
-        fetchDataAndRenderChart(selectedStat);
-    });
-
-    pitchSelectElement.addEventListener('change', (event) => {
-        const selectedPitchStat = event.target.value;
-        fetchPitchDataAndRenderChart(selectedPitchStat);
-    });
-
     function fetchDataAndRenderChart(stat) {
-        fetch('/api/stats')
+        fetch('static/tigers_regular_batting.json')
             .then(response => response.json())
             .then(data => {
-                if (chart) {
-                    chart.destroy();
-                }
-                const labels = data.map(item => item.Name);
-                const values = data.map(item => item[stat]); // Use the selected stat here
+                const ctx = document.getElementById('myChart')?.getContext('2d');
+                if (!ctx) return;
+                if (window.myChart) window.myChart.destroy();
 
-                chart = new Chart(ctx, {
+                const labels = data.map(item => item.Name);
+                const values = data.map(item => item[stat]);
+
+                window.myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: labels,
@@ -47,20 +30,22 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
-            });
+            })
+            .catch(err => console.error(err));
     }
 
     function fetchPitchDataAndRenderChart(stat) {
-        fetch('/api/pitching_stats')
+        fetch('static/tigers_regular_pitching.json')
             .then(response => response.json())
             .then(data => {
-                if (pitchChart) {
-                    pitchChart.destroy();
-                }
-                const labels = data.map(item => item.Name);
-                const values = data.map(item => item[stat]); // Use the selected stat here
+                const seasonCtx = document.getElementById('seasonChart')?.getContext('2d');
+                if (!seasonCtx) return;
+                if (window.seasonChart) window.seasonChart.destroy();
 
-                pitchChart = new Chart(pitchCtx, {
+                const labels = data.map(item => item.Name);
+                const values = data.map(item => item[stat]);
+
+                window.seasonChart = new Chart(seasonCtx, {
                     type: 'bar',
                     data: {
                         labels: labels,
@@ -80,10 +65,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
-            });
+            })
+            .catch(err => console.error(err));
     }
 
-    // Initial render with default stat
-    fetchDataAndRenderChart('G'); // Default to games played for hitters
-    fetchPitchDataAndRenderChart('GP'); // Default to games played for pitchers
+    // Initial Data Load Example
+    fetchDataAndRenderChart('G');  // Example stat 'G'
+    fetchPitchDataAndRenderChart('GP');  // Example stat 'GP'
+
+    // Update Charts When Selection Changes
+    const statSelect = document.getElementById('stat-select');
+    if (statSelect) {
+        statSelect.addEventListener('change', (event) => {
+            fetchDataAndRenderChart(event.target.value);
+        });
+    }
+
+    const pitchingStatSelect = document.getElementById('pitch-stat-select');
+    if (pitchingStatSelect) {
+        pitchingStatSelect.addEventListener('change', (event) => {
+            fetchPitchDataAndRenderChart(event.target.value);
+        });
+    }
 });
