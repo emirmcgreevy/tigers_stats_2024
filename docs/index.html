@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detroit Tigers 2024 Stats</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Oleo+Script:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+    <nav>
+        <ul>
+            <li><a href="/home">Home Page</a></li>
+            <li><a href="/">Regular Season Statistics</a></li>
+            <li><a href="/playoffs">Playoffs Statistics</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h1>Detroit Tigers 2024 Batting Statistics</h1>
+        <label for="stat-select">Choose a statistic for comparison:</label>
+        <select id="stat-select">
+            <option value="G">Games Played</option>
+            <option value="AB">At Bats</option>
+            <option value="R">Runs</option>
+            <option value="H">Hits</option>
+            <option value="2B">Doubles</option>
+            <option value="3B">Triples</option>
+            <option value="HR">Home Runs</option>
+            <option value="RBI">Runs Batted In</option>
+            <option value="BB">Walks</option>
+            <option value="SO">Strikeouts</option>
+            <option value="SB">Stolen Bases</option>
+            <option value="AVG">Batting Average</option>
+            <option value="OBP">On-Base Percentage</option>
+            <option value="SLG">Slugging Percentage</option>
+            <option value="OPS">On-Base Plus Slugging</option>
+            <!-- Add more options as needed -->
+        </select>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="container">
+        <h1>Detroit Tigers 2024 Pitching Statistics</h1>
+        <label for="pitch-stat-select">Choose a pitching statistic for comparison:</label>
+        <select id="pitch-stat-select">
+            <option value="GP">Games Played</option>
+            <option value="ERA">Earned Run Average</option>
+            <option value="W">Wins</option>
+            <option value="L">Losses</option>
+            <option value="GS">Games Started</option>
+            <option value="QS">Quality Starts</option>
+            <option value="SV">Saves</option>
+            <option value="HLD">Holds</option>
+            <option value="IP">Innings Pitched</option>
+            <option value="H">Hits</option>
+            <option value="ER">Earned Runs</option>
+            <option value="HR">Home Runs</option>
+            <option value="BB">Walks</option>
+            <option value="K">Strikeouts</option>
+            <option value="K9">Strikeouts per 9 Innings</option>
+            <option value="PS">Pitches per Start</option>
+            <option value="WAR">Wins Above Replacement</option>
+            <option value="WHIP">Walks Plus Hits per Inning Pitched</option>
+            <!-- Include the rest of the pitching options here -->
+        </select>
+        <canvas id="pitchChart"></canvas>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
