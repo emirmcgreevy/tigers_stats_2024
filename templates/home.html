@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Oleo+Script:wght@400;700&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="/home">Home Page</a></li>
+            <li><a href="/">Regular Season Statistics</a></li>
+            <li><a href="/playoffs">Playoffs Statistics</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>About Me</h1>
+        
+        <p>Hi! My Name is Emir McGreevy and I am a Junior at the University of Michigan majoring in Statistics and minoring in UX Design</p>
+        
+        <p>I've been a huge baseball fan my entire life and have always loved watching the Detroit Tigers. Keeping stats at games was one of my favorite activities as a little kid and helped me find my passion for sports statistics. For my SI 339 final project, I wanted to find a fun and creative way to display the statistics for my favorite team. The 2024 season will be talked about by Detroit sports fans for years to come. In August the team had a 0.2% chance at the playoffs, but defied all odds and secured their first playoff spot since 2014.</p>
+    </div>
+
+    <div class="container">
+        <h2>My Favorite Tiger's Memories</h2>
+    </div>
+
+    <div class="flex-container">
+        <div class="card">
+            <div class="firstGame card-content">
+                <div class="card-front">
+                    <img src="static/images/firstTigersGame.png" alt="Me and my twin brother at our first Tigers' game">
+                </div>
+                <div class="card-back">
+                    <p>This was me and my twin brother at our first Tigers' Game back in 2011</p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="sunset card-content">
+                <div class="card-front">
+                    <img src="static/images/comerica.png" alt="Picture of baseball game at Comerica Park in Detroit with a sunset in the background">
+                </div>
+                <div class="card-back">
+                    <p>This picture is from a few summers ago when I went to a game with some of my friends. The sunset in the background is so pretty. I especially love Saturday games because they always do a firework show afterwards!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+
+<footer>
+
+</footer>
+
+</html>
